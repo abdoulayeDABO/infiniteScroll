@@ -1,50 +1,58 @@
-# Welcome to your Expo app 👋
+# Infinite Scrolling Demo with React Query 🚀
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This project demonstrates infinite scrolling implementation using React Query in an Expo application.
 
-## Get started
+## 🎥 Demo
 
-1. Install dependencies
+<video src="https://drive.google.com/file/d/1LRKOA0nJ4TmYptqVO-cw5WgxZhqfBNW3/view?usp=sharing" width="320" height="240" controls></video>
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+- Infinite scrolling implementation
+- Data fetching with React Query
+- Smooth loading states
+- Efficient data caching
+- Pull-to-refresh functionality
 
-   ```bash
-    npx expo start
-   ```
+## 🛠 Technical Implementation
 
-In the output, you'll find options to open the app in a
+This project uses:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- [React Query](https://tanstack.com/query/latest) for efficient data fetching and caching
+- [Expo](https://expo.dev) as the development platform
+- File-based routing with Expo Router
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Key Features Implementation
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```typescript
+// Example of infinite scroll implementation
+const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  useInfiniteQuery({
+    queryKey: ["items"],
+    queryFn: fetchPageItems,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+  });
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📱 Running the App
 
-## Learn more
+You can run the app in:
 
-To learn more about developing your project with Expo, look at the following resources:
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🤝 Contributing
 
-## Join the community
+Feel free to contribute to this project by submitting issues or pull requests.
 
-Join our community of developers creating universal apps.
+## 📚 Resources
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [React Query Documentation](https://tanstack.com/query/latest/docs/react/overview)
+- [Expo Documentation](https://docs.expo.dev/)
+- [Infinite Scrolling Guide](https://tanstack.com/query/latest/docs/react/guides/infinite-queries)
+
+## 💬 Community
+
+- [Discord community](https://chat.expo.dev)
+- [GitHub repository](https://github.com/expo/expo)
