@@ -4,7 +4,7 @@ This project demonstrates infinite scrolling implementation using React Query in
 
 ## 🎥 Demo
 
-<video src="https://drive.google.com/file/d/1LRKOA0nJ4TmYptqVO-cw5WgxZhqfBNW3/view?usp=sharing" width="320" height="240" controls></video>
+<video width="630" height="300" src="https://github.com/user-attachments/assets/8f9e4efa-6d7b-4365-a224-25123b73545c" controls></video>
 
 ## ✨ Features
 
@@ -12,7 +12,7 @@ This project demonstrates infinite scrolling implementation using React Query in
 - Data fetching with React Query
 - Smooth loading states
 - Efficient data caching
-- Pull-to-refresh functionality
+- Pull-to-refresh functionality (in progress)
 
 ## 🛠 Technical Implementation
 
@@ -34,14 +34,6 @@ const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
   });
 ```
 
-## 📱 Running the App
-
-You can run the app in:
-
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go)
-
 ## 🤝 Contributing
 
 Feel free to contribute to this project by submitting issues or pull requests.
@@ -51,8 +43,3 @@ Feel free to contribute to this project by submitting issues or pull requests.
 - [React Query Documentation](https://tanstack.com/query/latest/docs/react/overview)
 - [Expo Documentation](https://docs.expo.dev/)
 - [Infinite Scrolling Guide](https://tanstack.com/query/latest/docs/react/guides/infinite-queries)
-
-## 💬 Community
-
-- [Discord community](https://chat.expo.dev)
-- [GitHub repository](https://github.com/expo/expo)
