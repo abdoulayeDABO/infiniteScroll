@@ -1,32 +1,66 @@
-import { Product } from '@/types/ProductTypes';
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image } from "expo-image";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
 
 const ListItem = ({ product }: { product: Product }) => {
+  const discountedPrice =
+    product.price * (1 - product.discountPercentage / 100);
+
   return (
     <View style={styles.card}>
-      <View style={styles.cardHeader}>
-        <Image source={{ uri: product.image }} style={styles.image} />
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{product.title}</Text>
-          <Text style={styles.price}>${product.price}</Text>
+      <Image
+        style={styles.image}
+        source={product.thumbnail}
+        placeholder={{ blurhash }}
+        contentFit="cover"
+        transition={1000}
+      />
+
+      <View style={styles.contentContainer}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.title} numberOfLines={1}>
+            {product.title}
+          </Text>
+          <View style={styles.priceContainer}>
+            {product.discountPercentage > 0 && (
+              <Text style={styles.originalPrice}>${product.price}</Text>
+            )}
+            <Text style={styles.price}>${discountedPrice.toFixed(2)}</Text>
+          </View>
         </View>
-      </View>
 
-      <View style={styles.cardBody}>
-        <Text style={styles.description}>{product.description}</Text>
-        <Text style={styles.details}>Brand: {product.brand}</Text>
-        <Text style={styles.details}>Model: {product.model}</Text>
-        <Text style={styles.details}>Color: {product.color}</Text>
-        {product.discount > 0 && (
-          <Text style={styles.discount}>Discount: {product.discount}%</Text>
-        )}
-      </View>
+        <Text style={styles.description} numberOfLines={2}>
+          {product.description}
+        </Text>
 
-      <View style={styles.cardFooter}>
-        <Text style={styles.category}>{product.category}</Text>
+        <View style={styles.detailsContainer}>
+          <View style={styles.ratingContainer}>
+            <Text style={styles.rating}>★ {product.rating}</Text>
+            <Text style={styles.stock}>Stock: {product.stock}</Text>
+          </View>
+
+          <View style={styles.categoryBadge}>
+            <Text style={styles.categoryText}>{product.category}</Text>
+          </View>
+        </View>
+
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Add to Cart</Text>
         </TouchableOpacity>
@@ -37,78 +71,100 @@ const ListItem = ({ product }: { product: Product }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
+    backgroundColor: "#fff",
+    borderRadius: 15,
+    marginHorizontal: 16,
+    marginVertical: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 10,
-    elevation: 5, // For Android
-    marginBottom: 20,
-    padding: 15,
-    overflow: 'hidden',
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    shadowRadius: 8,
+    elevation: 3,
+    flexDirection: "row",
+    padding: 12,
   },
   image: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
-    marginRight: 15,
+    width: 120,
+    height: 120,
+    borderRadius: 12,
   },
-  textContainer: {
+  contentContainer: {
     flex: 1,
+    marginLeft: 12,
+    justifyContent: "space-between",
+  },
+  headerContainer: {
+    marginBottom: 4,
   },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1a1a1a",
+  },
+  priceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 4,
+  },
+  originalPrice: {
+    fontSize: 14,
+    color: "#999",
+    textDecorationLine: "line-through",
+    marginRight: 8,
   },
   price: {
-    fontSize: 16,
-    color: '#4CAF50',
-    fontWeight: 'bold',
-    marginTop: 5,
-  },
-  cardBody: {
-    marginTop: 10,
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#2E7D32",
   },
   description: {
     fontSize: 14,
-    color: '#555',
+    color: "#666",
+    lineHeight: 20,
   },
-  details: {
+  detailsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 8,
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  rating: {
+    fontSize: 14,
+    color: "#FFA000",
+    fontWeight: "600",
+    marginRight: 8,
+  },
+  stock: {
     fontSize: 12,
-    color: '#888',
-    marginTop: 5,
+    color: "#666",
   },
-  discount: {
-    fontSize: 14,
-    color: '#E91E63',
-    marginTop: 10,
+  categoryBadge: {
+    backgroundColor: "#E3F2FD",
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
   },
-  cardFooter: {
-    marginTop: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  category: {
-    fontSize: 14,
-    color: '#777',
+  categoryText: {
+    fontSize: 12,
+    color: "#1976D2",
+    fontWeight: "500",
   },
   button: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
+    backgroundColor: "#1976D2",
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 8,
+    alignItems: "center",
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "600",
   },
 });
 

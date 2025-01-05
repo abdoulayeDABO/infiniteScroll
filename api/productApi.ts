@@ -1,5 +1,7 @@
-const fetchProducts = async ({ pageParam = 1 }) => {
-  const url = `https://fakestoreapi.in/api/products?limit=3?page=${pageParam}`;
+const apiUrl = "https://api.freeapi.app/api/v1/public/randomproducts?imit=10";
+
+const fetchProducts = async ({ page }: { page: number }) => {
+  const url = `${apiUrl}&page=${page}`;
   const response = await fetch(url);
   return response.json();
 };
